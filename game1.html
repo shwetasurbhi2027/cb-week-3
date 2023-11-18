@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz CB</title>
+  <style>
+     body {
+            background-image: url('https://imgs.search.brave.com/OL61FtgQ6IYmR6cA4Wc36cE8fBXJqLZGaYate6E2ORc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM5/OTA3MDM5NC9waG90/by9jaGluZXNlLWFz/dHJvbmF1dHMtb24t/bW9vbi13aXRoLXBl/cm1hbmVudC1iYXNl/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1sSElWRFZ0ajVo/R0ZPZXBxR0Y0azBD/VE1iTkVqMlR0bTJ4/SVV6c0RLb0pjPQ');
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            background-size: 100% 100%;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            color:rgb(255, 179, 0)
+            
+        }
+        #quizContainer {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color:blueviolet
+            
+        }
+        #optionsContainer {
+            margin-top: 50px;
+        }
+        #output {
+            margin-top: 100px;
+            font-size: 1.2em;
+            color: green;
+        }
+    
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>CELESTIAL BISCUIT QUIZ</h1>
+    <div id="quiz" class="quiz">
+      <!-- Questions and options will be added here dynamically with JavaScript -->
+    </div>
+    <button onclick="submitQuiz()">Submit Quiz</button>
+    <div id="result" class="result"></div>
+  </div>
+  <P>This is a wonderful Quiz to know your awesome CB members
+    <br>
+    Answer all the questions and show your love for this society cum family!!!
+  </P>
+
+  <script>
+    const quizData = [
+    {
+                question: "Word that reprsent our lovely PRESIDENTS?",
+                options: ["GALAXY", "ASTRONAUT", "SOLARIS", "MOON"],
+                correctAnswer: "SOLARIS"
+            },
+            {
+                question: "One word for our beautiful VICE PRESIDENTS?",
+                options: ["NORTHMAN", "NEBULISERS", "NURSES", "NEBULA"],
+                correctAnswer: "NEBULA"
+            },
+            {
+                question: "Lovely COMMUNITY MANAGERS are called?",
+                options: ["MARTIAL", "MARTIANS", "MARY", "MCARTHY"],
+                correctAnswer: "MARTIANS"
+            }
+    ];
+
+    const quizContainer = document.getElementById('quiz');
+    const resultContainer = document.getElementById('result');
+
+    function buildQuiz() {
+      quizData.forEach((data, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `<p>${index + 1}. ${data.question}</p>`;
+
+        const optionsDiv = document.createElement('div');
+        optionsDiv.classList.add('options');
+        data.options.forEach((option, optionIndex) => {
+          optionsDiv.innerHTML += `
+            <label>
+              <input type="radio" name="question${index}" value="${option}">
+              ${option}
+            </label>
+          `;
+        });
+
+        questionDiv.appendChild(optionsDiv);
+        quizContainer.appendChild(questionDiv);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      const answerContainers = document.querySelectorAll('.options');
+
+      quizData.forEach((data, index) => {
+        const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+        if (selectedOption) {
+          const userAnswer = selectedOption.value;
+          if (userAnswer === data.correctAnswer) {
+            score++;
+          }
+        }
+      });
+
+      const totalQuestions = quizData.length;
+      const percentage = (score / totalQuestions) * 100;
+
+      resultContainer.innerHTML = `Your score: ${score} out of ${totalQuestions} (${percentage.toFixed(2)}%)`;
+    }
+
+    buildQuiz();
+  </script>
+  <H2>MADE BY: SHWETA SURBHI</H2>
+  <H3>CBID: CB23257</H3>
+</body>
+</html>
+
